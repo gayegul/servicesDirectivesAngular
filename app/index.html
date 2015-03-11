@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Hello From Html</title>
+</head>
+<body data-ng-app="makeupsApp">
+	<main data-ng-controller="makeupsController" data-ng-init="getAll()">
+		<h1>Makeups:</h1>
+		<div data-create-makeup-directive></div>
+		<div data-create-resource-directive save="create(resource)" fieldname="'brand'"resourcename="Makeup"></div>
+		<ul data-ng-repeat="makeup in makeups">
+			<li>
+				{{makeup.brand}}
+				<form data-ng-if="makeup.editing">
+					<label for="makeup{{makeup._id}}">Edit Makeup</label>
+					<input type="text" id="makeup{{makeup._id}}" data-ng-model="makeup.brand">
+					<button type="submit" data-ng-click="save(makeup)">Save Changes</button>
+					<button type="button" data-ng-click="editToggle(makeup)">Cancel</button>
+				</form>
+				<button data-ng-click="editToggle(makeup)" data-ng-if="!makeup.editing">Edit Makeup</button>
+				<button data-ng-click="remove(makeup)">Delete Makeup</button>
+			</li>
+		</ul>
+	</main>
+
+	<script src="bundle.js"></script>
+</body>
+</html>
